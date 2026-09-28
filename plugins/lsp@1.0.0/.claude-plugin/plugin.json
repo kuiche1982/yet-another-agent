@@ -1,0 +1,6 @@
+{
+  "name": "lsp",
+  "version": "1.0.0",
+  "description": "LSP 语言服务器声明（config-only 插件，无 tools/skills）。为 python/go/rust/c/cpp/typescript/javascript 等语言登记诊断后端，由 harness 在写文件后惰性拉起对应服务器并回灌诊断。服务器命令在 .lsp.json 中按 languageId 声明（对齐 claude-code 的 lspServers 写法）。",
+  "author": { "name": "litertlm" }
+}

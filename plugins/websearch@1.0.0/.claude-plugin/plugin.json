@@ -1,0 +1,9 @@
+{
+  "name": "websearch",
+  "version": "1.0.0",
+  "description": "为 SWE-Agent 提供联网搜索能力：自带 web_search 工具（封装 Zhipu Web Search API，配额耗尽自动回退 DuckDuckGo），并提供使用技能与深度调研子智能体。",
+  "author": "litertlm",
+  "keywords": ["web", "search", "网络搜索", "zhipu"],
+  "toolsDir": "tools",
+  "lspServers": []
+}

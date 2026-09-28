@@ -1,0 +1,224 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f4f6f5;
+  --card: #ffffff;
+  --border: #e4e8e6;
+  --text: #2c3a36;
+  --text-muted: #8a9793;
+  --primary: #2f8f7a;
+  --primary-hover: #277a68;
+  --primary-soft: #e6f2ef;
+  --danger: #d96a5f;
+  --danger-hover: #c25a50;
+  --shadow: 0 2px 12px rgba(44, 58, 54, 0.06);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 32px 16px;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Toast */
+.toast {
+  background: #2c3a36;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+  opacity: 0.95;
+}
+
+/* Add form */
+.add-form {
+  display: flex;
+  gap: 8px;
+  background: var(--card);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.add-form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  padding: 8px 10px;
+  background: transparent;
+  color: var(--text);
+}
+
+.add-form input::placeholder {
+  color: #b6c0bc;
+}
+
+.add-form button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.add-form button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.add-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Status bar */
+.status-bar {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 0 4px 8px;
+}
+
+/* Todo list */
+.todo-list {
+  list-style: none;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: #fafbfa;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 15px;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-edit-input {
+  flex: 1;
+  font-size: 15px;
+  padding: 6px 8px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  outline: none;
+  color: var(--text);
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #c4cfcb;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+  background: #fbeceb;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 15px;
+}
+
+.empty-hint {
+  font-size: 13px;
+  margin-top: 4px;
+  color: #b6c0bc;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 10px;
+  }
+  .app-header h1 {
+    font-size: 24px;
+  }
+  .add-form button {
+    padding: 10px 14px;
+  }
+}

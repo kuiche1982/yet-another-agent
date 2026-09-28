@@ -1,0 +1,40 @@
+# 记忆系统配置
+
+# 模型配置
+model_path: "~/kuiwork/workdir2/litertlm/bge-m3-mlx-6bit"
+model_max_length: 8192
+
+# 分块参数
+chunk_size: 700
+chunk_overlap: 150
+
+# 混合检索参数
+dense_weight: 0.7
+sparse_weight: 0.3
+top_k_recall: 8
+top_k_rerank: 3
+
+# 递归摘要参数
+summary_group_size: 2
+summary_max_tokens: 700
+
+# 记忆分类配置
+use_llm_classifier: true
+llm_model_path: "~/.litert-lm/models/gemma4-e4b/model.litertlm"
+
+# 长文本摘要优化（推荐开启）
+summarize_threshold: 500      # 超过 500 tokens 时使用摘要
+summarize_max_tokens: 200     # 摘要压缩到 200 tokens 以内
+use_heavy_llm: false          # 是否使用大模型（复杂语义理解任务）
+summary_max_length_for_llm: 500  # LLM分类的最大文本长度
+
+# 持久化路径
+raw_dir: "memory/raw"
+embeddings_dir: "memory/embeddings"
+summaries_dir: "memory/summaries"
+metadata_db: "memory/metadata.db"
+
+# 知识库索引路径
+raw_data_dir: "data/raw"
+output_embeddings_dir: "data/embeddings"
+indexer_classify_threshold: 500  # 分类摘要阈值（tokens）

@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "demo": {
+      "command": "python",
+      "args": [
+        "python",
+        "scripts/mcp_demo_server.py"
+      ]
+    }
+  }
+}

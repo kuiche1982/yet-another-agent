@@ -1,0 +1,47 @@
+[
+  {
+    "languageId": "python",
+    "command": ".venv/bin/pylsp",
+    "args": []
+  },
+  {
+    "languageId": "go",
+    "command": "gopls",
+    "args": []
+  },
+  {
+    "languageId": "rust",
+    "command": "rust-analyzer",
+    "args": []
+  },
+  {
+    "languageId": "c",
+    "command": "clangd",
+    "args": []
+  },
+  {
+    "languageId": "cpp",
+    "command": "clangd",
+    "args": []
+  },
+  {
+    "languageId": "javascript",
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  },
+  {
+    "languageId": "javascriptreact",
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  },
+  {
+    "languageId": "typescript",
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  },
+  {
+    "languageId": "typescriptreact",
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  }
+]

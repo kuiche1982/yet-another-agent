@@ -1,0 +1,125 @@
+{
+  "model": "qwen2.5.1-coder-7b-instruct",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是顶层软件架构。结合调研发现把开发任务转化为一份【结构化执行契约】，交给下游实现。契约必须具体、无歧义、可分步执行。\n\n要求：\n- modules 是【文件级白名单契约】：Executor 只允许创建/修改这些文件及测试文件，不得新增契约外模块。文件后缀与技术栈一致（python→.py、go→.go、node→.js/.ts）；CLI 任务还需规划一个带 `if __name__ == '__main__':` 入口的可执行文件。\n- interface 必须列出本任务【全部】公开函数最终签名（参数名、类型、返回值），与各 modules 的 public 完全一致、与任务描述的函数名一一对应——这是 Executor 实现与测试的唯一依据，禁止自行改名或改参数个数；若任务要 CLI 入口，interface 必须显式包含 `def main(...) -> None`。\n- tasks 是【有序步骤】，每步 = step（描述）+ deliverables（本步真正落盘的相对路径文件清单，含测试文件）。遵循 TDD：测试必须覆盖【完整】验收规格（核心初始化、关键算法/边界、CLI 可运行性），不能只写首步测试就让其变绿；最终测试文件必须覆盖完整功能。\n- 测试文件【只建一个】，放在工作区【根目录】（如 test_life.py），【禁止】在 tests/ 子目录再建一份或留空文件（pytest 收集会报 collection error）。各步 deliverables 都指向这同一个测试文件。\n- verify_points（独立于测试的语义验收点）：每条一句自然语言描述的验收标准，供一个【独立、只读】的 tester 逐条验证「需求是否被真正满足」。要比测试更偏用户视角，覆盖①核心功能②边界/异常③CLI 可运行④关键算法语义。硬性下限：至少 3 条（建议 4~6 条），与 tasks 的 TDD 测试互补而不重复。check_hint 给 tester 具体可执行的验证手段。\n- 最后一步必须是「运行测试并确认全绿」（deliverables 含测试文件）。完成标准只有一个：工作区测试 count>0 且全部通过。\n- 若下方工作区已有代码/测试（接手场景）：规划最小修复路径，forbidden 必须含「禁止修改既有测试文件」。\n"
+    },
+    {
+      "role": "user",
+      "content": "【开发任务】\n用 Python 实现斐波那契数列（fibonacci）\n\n【当前工作区文件清单】\n（空目录，从零开始）\n\n【Analyzer 调研发现（只读探查得到的事实，请据此规划，不要重复探查）】\n斐波那契数列的计算规则为F(0)=0、F(1)=1、F(n)=F(n-1)+F(n-2)。常见的边界约定是F(0)和F(1)是基准值，对于负数索引通常不定义。接口形状为函数fibonacci，参数n（int），返回值为斐波那契数列的第n个数。测试约定是输入非负整数，输出对应的斐波那契数列值。潜在坑点是负数索引未定义和大数计算时递归方法可能导致栈溢出。"
+    }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "execution_plan",
+      "strict": "true",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "public": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "path",
+                "purpose",
+                "public"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "interface": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forbidden": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "step": {
+                  "type": "string"
+                },
+                "deliverables": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "step",
+                "deliverables"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "verify_points": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "point": {
+                  "type": "string"
+                },
+                "check_hint": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "point"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "language",
+          "summary",
+          "modules",
+          "interface",
+          "forbidden",
+          "tasks",
+          "verify_points"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "temperature": 0.2,
+  "max_tokens": 2000
+}

@@ -1,0 +1,16 @@
+[project]
+name = "litertlm"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = []
+
+# uv 原生支持：uv sync 会一并装 dev 组；不进 [project].dependencies，
+# 装包（pip install .）不会拖上测试依赖。
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py", "verify_*.py"]

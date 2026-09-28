@@ -1,0 +1,9 @@
+{
+  "name": "ocr",
+  "version": "1.0.0",
+  "description": "为 SWE-Agent 提供图片 OCR 能力：自带 ocr 工具（封装 Zhipu OCR 服务，支持印刷体/手写体、20+ 语言、返回每行文字与位置/置信度）。",
+  "author": "litertlm",
+  "keywords": ["ocr", "文字识别", "image", "zhipu"],
+  "toolsDir": "tools",
+  "lspServers": []
+}

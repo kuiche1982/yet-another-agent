@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>待办清单</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>待办清单</h1>
+      <p class="subtitle">把事情一件件做完</p>
+    </header>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <form id="add-form" class="add-form" autocomplete="off">
+      <input
+        id="add-input"
+        type="text"
+        placeholder="要做点什么？回车快速添加"
+        maxlength="200"
+      />
+      <button id="add-btn" type="submit">添加</button>
+    </form>
+
+    <div id="status-bar" class="status-bar">
+      <span id="count-text">加载中…</span>
+    </div>
+
+    <ul id="todo-list" class="todo-list"></ul>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <div class="empty-icon">📝</div>
+      <p>还没有待办事项</p>
+      <p class="empty-hint">在上面输入框里添加第一条吧</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

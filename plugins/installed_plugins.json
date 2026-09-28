@@ -1,0 +1,24 @@
+{
+  "plugins": {
+    "websearch@1.0.0": [
+      {
+        "installPath": "plugins/websearch@1.0.0"
+      }
+    ],
+    "web_fetch@1.0.0": [
+      {
+        "installPath": "plugins/web_fetch@1.0.0"
+      }
+    ],
+    "ocr@1.0.0": [
+      {
+        "installPath": "plugins/ocr@1.0.0"
+      }
+    ],
+    "lsp@1.0.0": [
+      {
+        "installPath": "plugins/lsp@1.0.0"
+      }
+    ]
+  }
+}

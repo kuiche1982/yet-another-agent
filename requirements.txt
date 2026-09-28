@@ -1,0 +1,5 @@
+litert-lm==0.15.0
+litert-lm-api==0.15.0
+litert-lm-builder==0.15.0
+litert-lm-builder-nightly==0.16.0.dev20260805
+python-dotenv

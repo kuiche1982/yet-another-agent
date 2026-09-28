@@ -1,0 +1,75 @@
+{
+  "pinned": {
+    "RAG_INJECT_MAX_CHARS": 240,
+    "RAG_INJECT_SUMMARY": 0,
+    "LOCAL_SEARCH_TOP_K": 3,
+    "LOCAL_SEARCH_SNIPPET_CHARS": 160
+  },
+  "clip": [
+    {
+      "case": "empty",
+      "in": "",
+      "max_chars": 240,
+      "out": "",
+      "clipped": false
+    },
+    {
+      "case": "short_untouched",
+      "in": "one short line",
+      "max_chars": 240,
+      "out": "one short line",
+      "clipped": false
+    },
+    {
+      "case": "multiline_line_boundary",
+      "in": "def handler_01(payload):\n    return payload.get('key_01', 0)\ndef handler_02(payload):\n    return payload.get('key_02', 0)\ndef handler_03(payload):\n    return payload.get('key_03', 0)\ndef handler_04(payload):\n    return payload.get('key_04', 0)\ndef handler_05(payload):\n    return payload.get('key_05', 0)\ndef handler_06(payload):\n    return payload.get('key_06', 0)\ndef handler_07(payload):\n    return payload.get('key_07', 0)\ndef handler_08(payload):\n    return payload.get('key_08', 0)\ndef handler_09(payload):\n    return payload.get('key_09', 0)\ndef handler_10(payload):\n    return payload.get('key_10', 0)\ndef handler_11(payload):\n    return payload.get('key_11', 0)\ndef handler_12(payload):\n    return payload.get('key_12', 0)",
+      "max_chars": 240,
+      "out": "def handler_01(payload):\n    return payload.get('key_01', 0)\ndef handler_02(payload):\n    return payload.get('key_02', 0)\n…（中间省略）…\ndef handler_12(payload):\n    return payload.get('key_12', 0)",
+      "clipped": true
+    },
+    {
+      "case": "single_line_char_split",
+      "in": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "max_chars": 240,
+      "out": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n…（中间省略）…\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "clipped": true
+    },
+    {
+      "case": "zero_budget",
+      "in": "text",
+      "max_chars": 0,
+      "out": "text",
+      "clipped": false
+    }
+  ],
+  "ref_location": [
+    {
+      "case": "code_with_lines",
+      "loc": "swe_agent/management.py:485-507",
+      "pointer": "read_file swe_agent/management.py offset=485 limit=23"
+    },
+    {
+      "case": "code_without_lines",
+      "loc": "README.md",
+      "pointer": "read_file README.md"
+    },
+    {
+      "case": "library_with_lines",
+      "loc": "KnowledgeBase/workflow_design.md:101-105",
+      "pointer": "read_file KnowledgeBase/workflow_design.md offset=101 limit=5"
+    },
+    {
+      "case": "library_without_lines",
+      "loc": "KnowledgeBase/workflow_design.md",
+      "pointer": "read_file KnowledgeBase/workflow_design.md"
+    },
+    {
+      "case": "library_unknown_origin",
+      "loc": "kb:missing_doc:7-9",
+      "pointer": "read_file kb:missing_doc offset=7 limit=3"
+    }
+  ],
+  "rag_block": "我找到了如下相关信息（本地知识库/代码，按相关性排序，共 3 条；正文为原文片段，出处含文件与行号，可直接引用，无需再逐个读文件）：\n\n### [1] KnowledgeBase/workflow_design.md:101-105 · 相关性 0.95\ndef handler_01(payload):\n    return payload.get('key_01', 0)\ndef handler_02(payload):\n    return payload.get('key_02', 0)\n…（中间省略）…\ndef handler_12(payload):\n    return payload.get('key_12', 0)\n（已截断，读全文：read_file KnowledgeBase/workflow_design.md offset=101 limit=5）\n\n### [2] swe_agent/management.py:973-975 · 相关性 0.87\ndef prepare_messages(self, model_context_length=64000):\n    return []\n\n### [3] KnowledgeBase/workflow_design.md · 相关性 0.31\nJudge mode: post-hoc binary review.",
+  "local_search": "本地检索结果（scope=all，按相关性降序，第 1-2 条）：\n1. [proj] KnowledgeBase/workflow_design.md:101-105 · 相关性 0.95\n   → read_file KnowledgeBase/workflow_design.md offset=101 limit=5\n   def handler_01(payload):\n    return payload.get('key_01', 0)\ndef handler_02(payload):\n…（中间省略）…\ndef handler_12(payload):\n    return payload.get('key_12', 0)\n2. [code] swe_agent/management.py:973-975 · 相关性 0.87\n   → read_file swe_agent/management.py offset=973 limit=3\n   def prepare_messages(self, model_context_length=64000):\n    return []",
+  "local_search_paged": "本地检索结果（scope=all，按相关性降序，第 2-3 条）：\n2. [proj] KnowledgeBase/workflow_design.md:101-105 · 相关性 0.95\n   → read_file KnowledgeBase/workflow_design.md offset=101 limit=5\n   def handler_01(payload):\n    return payload.get('key_01', 0)\ndef handler_02(payload):\n…（中间省略）…\ndef handler_12(payload):\n    return payload.get('key_12', 0)\n3. [code] swe_agent/management.py:973-975 · 相关性 0.87\n   → read_file swe_agent/management.py offset=973 limit=3\n   def prepare_messages(self, model_context_length=64000):\n    return []"
+}

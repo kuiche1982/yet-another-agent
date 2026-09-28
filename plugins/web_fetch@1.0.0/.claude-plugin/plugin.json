@@ -1,0 +1,9 @@
+{
+  "name": "web_fetch",
+  "version": "1.0.0",
+  "description": "为 SWE-Agent 提供网页抓取与阅读能力：自带 web_fetch 工具（封装 Zhipu 网页阅读 API，按 URL 抓取并解析为 markdown/text，Zhipu 不可用时回退直接抓取）。",
+  "author": "litertlm",
+  "keywords": ["web", "fetch", "reader", "网页阅读", "zhipu"],
+  "toolsDir": "tools",
+  "lspServers": []
+}
