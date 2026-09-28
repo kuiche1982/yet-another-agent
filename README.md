@@ -1,5 +1,7 @@
 # litertlm
 
+**中文** | [English](./README.en.md)
+
 个人学习项目：用本地模型（litert-lm / MLX 量化）动手实现和践行 agent harness 的各种方法——SWE-agent 式的任务编排、上下文管理、记忆、评测与插件化。**实验性质，仅供参考，不保证可用，勿用于生产或关键任务。**
 
 ## 是什么
